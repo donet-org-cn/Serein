@@ -6,7 +6,13 @@ Serein（/səˈreɪn/）专注于媒体接入、解包、转封装、分发与�
 
 只包含流媒体处理。设备注册、SIP 信令、国标目录/级联、JT808/JT1078 设备服务、ONVIF 和电话交换业务均不在本仓库中。
 
-当前版本：`0.1.0-preview.1`，可从源码使用或打包到本地 NuGet 源，尚未发布到公共 NuGet。
+当前版本：`0.1.0-preview.1`，已通过 GitHub Actions 发布到 NuGet，可直接安装：
+
+```sh
+dotnet add package Serein.AspNetCore --version 0.1.0-preview.1
+```
+
+只使用媒体内核时安装 `Serein.Media`。包列表：[Media](https://www.nuget.org/packages/Serein.Media/0.1.0-preview.1)、[Rtsp](https://www.nuget.org/packages/Serein.Rtsp/0.1.0-preview.1)、[Hosting](https://www.nuget.org/packages/Serein.Hosting/0.1.0-preview.1)、[AspNetCore](https://www.nuget.org/packages/Serein.AspNetCore/0.1.0-preview.1)。
 
 ## 当前能力
 
@@ -72,7 +78,7 @@ FLV 播放需要支持相应编码的客户端；示例不包含浏览器解码�
 
 ## 作为库使用
 
-引用 `src/Serein.AspNetCore/Serein.AspNetCore.csproj`：
+安装 `Serein.AspNetCore` NuGet 包，或引用 `src/Serein.AspNetCore/Serein.AspNetCore.csproj`：
 
 ```csharp
 using Serein.AspNetCore;

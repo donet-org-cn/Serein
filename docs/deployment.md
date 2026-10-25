@@ -45,6 +45,12 @@ dotnet pack Serein.slnx -c Release -o artifacts/packages
 dotnet add YourApp.csproj package Serein.AspNetCore --version 0.1.0-preview.1 --source artifacts/packages
 ```
 
-仓库没有发布到公共包源，名称也未在公共包源申请或保留。源代码构建仅访问公开 NuGet 源。
+四个库均已发布 `0.1.0-preview.1` 到公共 NuGet：
+
+```sh
+dotnet add YourApp.csproj package Serein.AspNetCore --version 0.1.0-preview.1
+```
+
+可以按需将包名替换为 `Serein.Media`、`Serein.Rtsp` 或 `Serein.Hosting`。源代码构建仅访问公开 NuGet 源。
 
 自动发布使用独立的 [NuGet 发布流水线](publishing.md)，支持版本标签和手动运行。配置完成前可先运行不上传包的打包验证。

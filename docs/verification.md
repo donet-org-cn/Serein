@@ -15,6 +15,8 @@
 
 集成测试覆盖真实回环网络上的 RTSP 输入、HTTP-FLV、WebSocket-FLV、RTSP 输出和停机清理；另有 UDP PS/RTP 接入测试。音视频负载为合成测试数据，不需要外部摄像头。
 
-CI 已配置 Windows 和 Linux；Linux 工作流尚未在本次会话实际执行。没有对生产设备、规模吞吐、连续长时间运行、端到端延迟或浏览器解码兼容性作实测结论。
+Windows 和 Linux 均已在 GitHub Actions 上实际验证通过。`v0.1.0-preview.1` 的[正式发布运行](https://github.com/hnlyf168/Serein/actions/runs/40179376184)完成了两种系统的测试、四个包的验证、NuGet OIDC 登录与上传。
+
+没有对生产设备、规模吞吐、连续长时间运行、端到端延迟或浏览器解码兼容性作实测结论。
 
 可通过仓库根目录的 `tools/verify.ps1` 重现。此测试套件为可执行程序，不能用成功退出但未发现测试的 `dotnet test` 替代。
