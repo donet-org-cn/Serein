@@ -46,3 +46,5 @@ dotnet add YourApp.csproj package Serein.AspNetCore --version 0.1.0-preview.1 --
 ```
 
 仓库没有发布到公共包源，名称也未在公共包源申请或保留。源代码构建仅访问公开 NuGet 源。
+
+自动发布使用独立的 [NuGet 发布流水线](publishing.md)，支持版本标签和手动运行。配置完成前可先运行不上传包的打包验证。

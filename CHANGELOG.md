@@ -10,3 +10,5 @@
 - Added a standalone server example, public NuGet restore, package metadata, MIT license and CI.
 - Made RTSP and TCP-FLV startup wait for a bound listener under .NET 10.
 - Wait for listener rollback before surfacing startup failures from RTSP, TCP-FLV and PS/RTP receivers.
+- Added tag/manual NuGet publishing with Windows/Linux verification, release version checks, package validation and API key or OIDC authentication.
+- Derive the HTTP status version from the built assembly so tagged packages report the correct version.

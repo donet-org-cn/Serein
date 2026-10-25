@@ -148,6 +148,11 @@ static async Task EndToEnd()
             app.Services.GetRequiredService<MediaStreamHub>().TryGetVideoInfo("camera", "main", out _, out _));
         var address = app.Services.GetRequiredService<IServer>().Features.Get<IServerAddressesFeature>()!.Addresses.Single();
         using var http = new HttpClient { BaseAddress = new Uri(address) };
+        var statusJson = await http.GetStringAsync("/api/status");
+        using var statusDocument = System.Text.Json.JsonDocument.Parse(statusJson);
+        string expectedVersion = typeof(SereinEndpointExtensions).Assembly
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()!.InformationalVersion.Split('+')[0];
+        Check(statusDocument.RootElement.GetProperty("version").GetString() == expectedVersion, "Status endpoint did not report the built package version.");
         using var response = await http.GetAsync("/live/camera/main.flv", HttpCompletionOption.ResponseHeadersRead);
         response.EnsureSuccessStatusCode();
         Check(response.Content.Headers.ContentType?.MediaType == "video/x-flv", "Unexpected FLV content type.");

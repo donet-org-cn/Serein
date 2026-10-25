@@ -1,0 +1,111 @@
+name: Publish NuGet
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Package version without v; leave empty to use Directory.Build.props'
+        type: string
+        required: false
+      publish:
+        description: 'Upload all four packages to nuget.org after verification'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.release.outputs.version }}
+      publish: ${{ steps.release.outputs.publish }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Resolve and validate release version
+        id: release
+        shell: pwsh
+        env:
+          VERSION_INPUT: ${{ inputs.version }}
+          PUBLISH_INPUT: ${{ inputs.publish }}
+          RELEASE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || '' }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          if ($env:PUBLISH_INPUT -eq 'true' -and $env:GITHUB_REF_TYPE -eq 'branch' -and $env:GITHUB_REF_NAME -ne $env:DEFAULT_BRANCH) {
+            throw 'Manual publishing must run from the default branch or a release tag.'
+          }
+          ./tools/resolve-release.ps1 -Version $env:VERSION_INPUT -Tag $env:RELEASE_TAG -Publish:($env:GITHUB_EVENT_NAME -eq 'push' -or $env:PUBLISH_INPUT -eq 'true')
+
+  verify:
+    name: Verify and pack (${{ matrix.os }})
+    needs: prepare
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Build, audit, test and validate packages
+        shell: pwsh
+        env:
+          RELEASE_VERSION: ${{ needs.prepare.outputs.version }}
+        run: ./tools/verify.ps1 -Version $env:RELEASE_VERSION
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nuget-${{ needs.prepare.outputs.version }}-${{ matrix.os }}
+          path: artifacts/packages/*.nupkg
+          if-no-files-found: error
+          retention-days: 30
+
+  publish:
+    name: Publish to nuget.org
+    needs: [prepare, verify]
+    if: needs.prepare.outputs.publish == 'true' && github.repository == 'hnlyf168/Serein'
+    runs-on: ubuntu-latest
+    environment: nuget
+    concurrency:
+      group: nuget-publish
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+      NUGET_USER: ${{ vars.NUGET_USER }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Check NuGet authentication configuration
+        shell: pwsh
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:NUGET_API_KEY) -and [string]::IsNullOrWhiteSpace($env:NUGET_USER)) {
+            throw 'Configure NUGET_API_KEY or NUGET_USER and a NuGet trusted publishing policy. See docs/publishing.md.'
+          }
+      - uses: actions/download-artifact@v4
+        with:
+          name: nuget-${{ needs.prepare.outputs.version }}-ubuntu-latest
+          path: artifacts/packages
+      - name: NuGet login with OIDC
+        if: env.NUGET_API_KEY == ''
+        id: nuget-login
+        uses: NuGet/login@v1
+        with:
+          user: ${{ vars.NUGET_USER }}
+      - name: Push verified packages
+        shell: pwsh
+        env:
+          RELEASE_VERSION: ${{ needs.prepare.outputs.version }}
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY || steps.nuget-login.outputs.NUGET_API_KEY }}
+        run: ./tools/publish-nuget.ps1 -Version $env:RELEASE_VERSION

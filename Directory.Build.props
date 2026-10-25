@@ -11,6 +11,10 @@
     <Product>Serein</Product>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/hnlyf168/Serein</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/hnlyf168/Serein</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IsPackable>false</IsPackable>
     <WarnOnPackingNonPackableProject>false</WarnOnPackingNonPackableProject>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
