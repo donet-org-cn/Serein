@@ -1,0 +1,15 @@
+**/bin/
+**/obj/
+.vs/
+.vscode/
+.idea/
+.cache/
+.dotnet/
+artifacts/
+recordings/
+*.user
+*.suo
+*.log
+appsettings.Local.json
+*.pfx
+*.pem

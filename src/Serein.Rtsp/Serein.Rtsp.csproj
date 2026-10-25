@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>Serein.Rtsp</RootNamespace>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <Description>RTSP 服务端/客户端、FLV 直播服务、FLV 封装器，配合 Serein.Media 使用。</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Serein.Media\Serein.Media.csproj" />
+  </ItemGroup>
+</Project>

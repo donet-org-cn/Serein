@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>Serein.AspNetCore</RootNamespace>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <Description>通用 RTP 媒体流 ASP.NET Core 扩展库，支持 HTTP-FLV / WebSocket-FLV 实时转发，兼容 PS/RTP / RTSP 等多种协议。</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Serein.Rtsp\Serein.Rtsp.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Serein.Hosting\Serein.Hosting.csproj" />
+  </ItemGroup>
+</Project>

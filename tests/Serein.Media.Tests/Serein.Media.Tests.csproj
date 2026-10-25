@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Serein.Media\Serein.Media.csproj" />
+    <ProjectReference Include="..\..\src\Serein.Rtsp\Serein.Rtsp.csproj" />
+  </ItemGroup>
+</Project>

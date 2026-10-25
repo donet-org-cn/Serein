@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Dependency injection and resilient RTSP source hosting for Serein.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Serein.Rtsp/Serein.Rtsp.csproj" />
+  </ItemGroup>
+</Project>

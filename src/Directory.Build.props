@@ -1,0 +1,7 @@
+<Project>
+  <Import Project="../Directory.Build.props" />
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <PackageTags>streaming;media;rtsp;rtp;flv;dotnet;managed</PackageTags>
+  </PropertyGroup>
+</Project>

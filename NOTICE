@@ -1,0 +1,12 @@
+Serein
+
+The media modules were extracted and reorganized from the author's existing
+Qcxt.Net.RTP and Qcxt.Net.RTSP implementation.
+The original project metadata attributes copyright to:
+Copyright (c) 2026 全程迅通科技开发有限公司
+
+The import preserves this attribution. Serein.Hosting was implemented for the
+standalone repository. The private Qcxt package is no longer required.
+
+ZLMediaKit was consulted as a feature and organization reference. No ZLMediaKit
+source code or binaries are included, and Serein is not affiliated with it.

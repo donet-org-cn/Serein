@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Serein.AspNetCore/Serein.AspNetCore.csproj" />
+    <Project Path="src/Serein.Hosting/Serein.Hosting.csproj" />
+    <Project Path="src/Serein.Media/Serein.Media.csproj" />
+    <Project Path="src/Serein.Rtsp/Serein.Rtsp.csproj" />
+  </Folder>
+  <Folder Name="/samples/">
+    <Project Path="samples/Serein.Server/Serein.Server.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Serein.Hosting.Tests/Serein.Hosting.Tests.csproj" />
+    <Project Path="tests/Serein.Media.Tests/Serein.Media.Tests.csproj" />
+  </Folder>
+</Solution>
