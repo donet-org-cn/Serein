@@ -70,7 +70,7 @@ jobs:
   publish:
     name: Publish to nuget.org
     needs: [prepare, verify]
-    if: needs.prepare.outputs.publish == 'true' && github.repository == 'hnlyf168/Serein'
+    if: needs.prepare.outputs.publish == 'true' && github.repository == 'donet-org-cn/Serein'
     runs-on: ubuntu-latest
     environment: nuget
     concurrency:
