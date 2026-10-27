@@ -160,7 +160,7 @@ dotnet pack Serein.slnx -c Release --no-build -o artifacts/packages
 
 一键验证：`pwsh -File tools/verify.ps1`；Windows PowerShell 可使用 `powershell -ExecutionPolicy Bypass -File tools/verify.ps1`。CI 配置覆盖 Windows / Linux；实际执行结果见[验证记录](docs/verification.md)。
 
-NuGet 发布流水线：[Publish NuGet](https://github.com/hnlyf168/Serein/actions/workflows/publish-nuget.yml)。推送 `v0.1.0-preview.1` 这类版本标签时，在 Windows/Linux 验证通过后发布四个包；手动运行默认只验证打包。首次发布需配置 NuGet 身份，见[发布指南](docs/publishing.md)。
+NuGet 发布流水线：[Publish NuGet](https://github.com/donet-org-cn/Serein/actions/workflows/publish-nuget.yml)。推送 `v0.1.0-preview.1` 这类版本标签时，在 Windows/Linux 验证通过后发布四个包；手动运行默认只验证打包。首次发布需配置 NuGet 身份，见[发布指南](docs/publishing.md)。
 
 ## 文档
 
